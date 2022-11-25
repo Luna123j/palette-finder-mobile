@@ -1,3 +1,4 @@
 ## React native project
 
-## color pallette generator from picture
+## convert image to pixel art
+## color pallette generation from image
