@@ -26,7 +26,7 @@ export default function App() {
     console.log(result);
 
     if (!result.canceled) {
-      setFilepath(result.assets[0].uri);
+      setFilepath({uri:result.assets[0].uri});
     };
   };
 
@@ -43,14 +43,14 @@ export default function App() {
     console.log(result);
 
     if (!result.canceled) {
-      setPickedImagePath(result.uri);
-      console.log(result.uri);
+      setFilepath({uri:result.assets[0].uri});
+      console.log(result.assets[0].uri);
     }
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Let's choose images</Text>
+      <Text>choose image</Text>
       <ImageArea source={{ uri: filepath.uri }} />
       <UploadBtn onPress={chooseFile} text={"Choose image from library"} />
       <UploadBtn onPress={openCamera} text={"Take photo"} />
