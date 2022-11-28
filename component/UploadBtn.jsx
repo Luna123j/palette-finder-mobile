@@ -1,11 +1,11 @@
 import React from "react";
 import { TouchableOpacity,Button, Pressable, StyleSheet, Text, View } from 'react-native';
 
-export default function UploadBtn(){
+export default function UploadBtn(props){
   return(
     <View style={styles.container}>
-      <TouchableOpacity style ={styles.btn} >
-        <Text style={styles.text}>Upload Image to Start</Text>
+      <TouchableOpacity style ={styles.btn} onPress={props.onPress}>
+        <Text style={styles.text}>{props.text}</Text>
       </TouchableOpacity>
     </View>
   )
