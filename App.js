@@ -6,7 +6,7 @@ import * as ImagePicker from 'expo-image-picker'
 
 export default function App() {
 
-  const [filepath, setFilepath] = useState({ uri: 'https://www.seekpng.com/png/detail/109-1095120_art-ghost-by-slhqueenbee-pixel-art-ghost.png' });
+  const [filepath, setFilepath] = useState({uri:""});
 
   const chooseFile = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -23,10 +23,9 @@ export default function App() {
       quality: 1,
     });
 
-    console.log(result);
 
     if (!result.canceled) {
-      setFilepath({uri:result.assets[0].uri});
+      setFilepath({ uri: result.assets[0].uri });
     };
   };
 
@@ -40,20 +39,35 @@ export default function App() {
 
     const result = await ImagePicker.launchCameraAsync();
 
-    console.log(result);
-
     if (!result.canceled) {
-      setFilepath({uri:result.assets[0].uri});
-      console.log(result.assets[0].uri);
+      setFilepath({ uri: result.assets[0].uri });
     }
+  }
+
+  const createPixelArt =()=>{
+
+  }
+
+  const createPallete =()=>{
+
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Text>choose image</Text>
       <ImageArea source={{ uri: filepath.uri }} />
-      <UploadBtn onPress={chooseFile} text={"Choose image from library"} />
-      <UploadBtn onPress={openCamera} text={"Take photo"} />
+      {filepath.uri ?
+        <>
+          <UploadBtn onPress={createPixelArt} text={"create pixel art"} />
+          <UploadBtn onPress={createPallete} text={"create pallete"} />
+          <UploadBtn onPress={chooseFile} text={"retake image"} />
+        </>
+        :
+        <>
+          <UploadBtn onPress={chooseFile} text={"Choose image from library"} />
+          <UploadBtn onPress={openCamera} text={"Take photo from Camera"} />
+        </>}
+
     </SafeAreaView>
   );
 }
