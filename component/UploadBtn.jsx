@@ -1,12 +1,12 @@
 import React from "react";
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
+import { TouchableOpacity,Button, Pressable, StyleSheet, Text, View } from 'react-native';
 
 export default function UploadBtn(){
   return(
     <View style={styles.container}>
-      <Pressable style ={styles.btn} >
+      <TouchableOpacity style ={styles.btn} >
         <Text style={styles.text}>Upload Image to Start</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   )
 }
