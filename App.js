@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, Platform, PermissionsAndroid } from 'react-native';
 import ImageArea from './component/ImageArea';
 import UploadBtn from './component/UploadBtn';
@@ -7,6 +7,8 @@ import * as ImagePicker from 'expo-image-picker'
 export default function App() {
 
   const [filepath, setFilepath] = useState({uri:""});
+  const imgRef = useRef<HTMLImageElement>('uploadImg')
+  const [imgData, setImgData]=useState()
 
   const chooseFile = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -49,7 +51,22 @@ export default function App() {
   }
 
   const createPallete =()=>{
-
+    const img = imgRef.current;
+    if (!img?.width) {
+      return;
+    }
+    const { width, height } = img;
+    const canvas = document.createElement("canvas");
+    canvas.height = height;
+    canvas.width = width;
+    const context = canvas.getContext?.("2d");
+    if (context === null) {
+      return;
+    }
+    context.drawImage(img, 0, 0);
+    const imageData = context.getImageData(0, 0, width, height);
+    console.log(`Image Data`, imageData);
+    setImgData(imageData)
   }
 
   return (
