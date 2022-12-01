@@ -6,9 +6,9 @@ import * as ImagePicker from 'expo-image-picker'
 
 export default function App() {
 
-  const [filepath, setFilepath] = useState({uri:""});
-  const imgRef = useRef<HTMLImageElement>('uploadImg')
-  const [imgData, setImgData]=useState()
+  const [filepath, setFilepath] = useState({ uri: "" });
+  const imgRef = useRef < HTMLImageElement > ('uploadImg')
+  const [imgData, setImgData] = useState()
 
   const chooseFile = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -46,11 +46,11 @@ export default function App() {
     }
   }
 
-  const createPixelArt =()=>{
+  const createPixelArt = () => {
 
   }
 
-  const createPallete =()=>{
+  const createPallete = () => {
     const img = imgRef.current;
     if (!img?.width) {
       return;
@@ -72,7 +72,11 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Text>choose image</Text>
-      <ImageArea source={{ uri: filepath.uri }} />
+      {imgData ?
+        <ImageArea source={{ uri: filepath.uri }} />
+        :
+        <ImageArea source={{ uri: filepath.uri }} />
+      }
       {filepath.uri ?
         <>
           <UploadBtn onPress={createPixelArt} text={"create pixel art"} />
