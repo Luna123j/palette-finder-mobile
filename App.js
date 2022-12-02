@@ -73,7 +73,7 @@ export default function App() {
     <SafeAreaView style={styles.container}>
       <Text>choose image</Text>
       {imgData ?
-        <ImageArea source={{ uri: filepath.uri }} />
+        <Pixelimg source={{ uri: filepath.uri }} imgData={imgData} />
         :
         <ImageArea source={{ uri: filepath.uri }} />
       }
