@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
+import { Button, Image, StyleSheet, Text, View ,SafeAreaView} from 'react-native';
+import Canvas from 'react-native-canvas';
 
 
 export default function Pixelimg(props){
@@ -11,6 +12,7 @@ export default function Pixelimg(props){
     <View>
       <Image source={{ uri: 'data:image/jpeg;base64,' + props.imgData }} style = {{ width: 200, height: 200 }}/>
       <Text> {}</Text>
+      <Canvas id={'canvas'}></Canvas>
     </View>
   )
 }

@@ -5,11 +5,14 @@ import UploadBtn from './component/UploadBtn';
 import * as ImagePicker from 'expo-image-picker'
 import Pixelimg from './component/Pixelimg';
 
+
 export default function App() {
 
   const [filepath, setFilepath] = useState({ uri: "" });
-  const imgRef = useRef<ImageArea>('uploadImg')
+  const imgRef = useRef(null)
   const [imgData, setImgData] = useState({})
+  const height = filepath.height
+  const width = filepath.width
 
   const chooseFile = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -29,7 +32,7 @@ export default function App() {
 
 
     if (!result.canceled) {
-      setFilepath({ uri: result.assets[0].uri,base64: result.assets[0].base64});
+      setFilepath({ uri: result.assets[0].uri,base64: result.assets[0].base64, width: result.assets[0].width, height:result.assets[0].height });
     };
   };
 
@@ -50,6 +53,7 @@ export default function App() {
 
   const createPixelArt = () => {
 
+
     setImgData({base64: filepath.base64})
   }
 
@@ -59,7 +63,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>choose image</Text>
+      <Text>choose image: {convImg}</Text>
       {imgData.base64 ?
         <Pixelimg source={{ uri: filepath.uri }} imgData={imgData.base64} />
         :
