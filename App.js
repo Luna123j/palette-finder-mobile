@@ -7,7 +7,7 @@ import * as ImagePicker from 'expo-image-picker'
 export default function App() {
 
   const [filepath, setFilepath] = useState({ uri: "" });
-  const imgRef = useRef < HTMLImageElement > ('uploadImg')
+  const imgRef = useRef('uploadImg')
   const [imgData, setImgData] = useState()
 
   const chooseFile = async () => {
