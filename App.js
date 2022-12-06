@@ -3,12 +3,13 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, Platform
 import ImageArea from './component/ImageArea';
 import UploadBtn from './component/UploadBtn';
 import * as ImagePicker from 'expo-image-picker'
+import Pixelimg from './component/Pixelimg';
 
 export default function App() {
 
   const [filepath, setFilepath] = useState({ uri: "" });
-  const imgRef = useRef('uploadImg')
-  const [imgData, setImgData] = useState()
+  const imgRef = useRef<ImageArea>('uploadImg')
+  const [imgData, setImgData] = useState({})
 
   const chooseFile = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -23,11 +24,12 @@ export default function App() {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
+      base64: true,
     });
 
 
     if (!result.canceled) {
-      setFilepath({ uri: result.assets[0].uri });
+      setFilepath({ uri: result.assets[0].uri,base64: result.assets[0].base64});
     };
   };
 
@@ -42,38 +44,24 @@ export default function App() {
     const result = await ImagePicker.launchCameraAsync();
 
     if (!result.canceled) {
-      setFilepath({ uri: result.assets[0].uri });
+      setFilepath({ uri: result.assets[0].uri, base64: result.assets[0].base64 });
     }
   }
 
   const createPixelArt = () => {
 
+    setImgData({base64: filepath.base64})
   }
 
   const createPallete = () => {
-    const img = imgRef.current;
-    if (!img?.width) {
-      return;
-    }
-    const { width, height } = img;
-    const canvas = document.createElement("canvas");
-    canvas.height = height;
-    canvas.width = width;
-    const context = canvas.getContext?.("2d");
-    if (context === null) {
-      return;
-    }
-    context.drawImage(img, 0, 0);
-    const imageData = context.getImageData(0, 0, width, height);
-    console.log(`Image Data`, imageData);
-    setImgData(imageData)
+
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Text>choose image</Text>
-      {imgData ?
-        <Pixelimg source={{ uri: filepath.uri }} imgData={imgData} />
+      {imgData.base64 ?
+        <Pixelimg source={{ uri: filepath.uri }} imgData={imgData.base64} />
         :
         <ImageArea source={{ uri: filepath.uri }} />
       }

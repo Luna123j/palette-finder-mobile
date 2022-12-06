@@ -6,10 +6,11 @@ export default function Pixelimg(props){
   const quantization =()=>{
 
   }
-  
+
   return(
     <View>
-      <Image id={'uploadImg'} source = {props.source} style = {{ width: 200, height: 200 }}/>
+      <Image source={{ uri: 'data:image/jpeg;base64,' + props.imgData }} style = {{ width: 200, height: 200 }}/>
+      <Text> {}</Text>
     </View>
   )
 }
