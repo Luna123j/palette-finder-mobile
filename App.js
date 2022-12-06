@@ -63,7 +63,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>choose image: {convImg}</Text>
+      <Text>choose image: </Text>
       {imgData.base64 ?
         <Pixelimg source={{ uri: filepath.uri }} imgData={imgData.base64} />
         :

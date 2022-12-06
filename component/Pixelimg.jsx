@@ -11,8 +11,7 @@ export default function Pixelimg(props){
   return(
     <View>
       <Image source={{ uri: 'data:image/jpeg;base64,' + props.imgData }} style = {{ width: 200, height: 200 }}/>
-      <Text> {}</Text>
-      <Canvas id={'canvas'}></Canvas>
+      {/* <Canvas id={'canvas'}></Canvas> */}
     </View>
   )
 }
