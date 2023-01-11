@@ -58,14 +58,13 @@ export default function App() {
   }
 
   const createPallete = () => {
-
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Text>choose image: </Text>
       {imgData.base64 ?
-        <Pixelimg source={{ uri: filepath.uri }} imgData={imgData.base64} />
+        <Pixelimg source={{ uri: filepath.uri }} imgData={filepath} />
         :
         <ImageArea source={{ uri: filepath.uri }} />
       }
