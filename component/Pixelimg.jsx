@@ -15,16 +15,11 @@ export default function Pixelimg(props) {
   const [colorD, setColorD] = useState(initialState);
   const [loading, setLoading] = useState(true)
 
-console.log(props.source);
-
-
-
   useEffect(() => {
     const fetchColor = async () => {
-      const result = await ImageColors.getColors(props.source.uri, {
+      const result = await ImageColors.getColors(`data:image/jpeg;base64,${props.imgData.base64}`, {
         fallback: '#000000',
         quality: 'low',
-        pixelSpacing: 5,
         headers: {
           authorization: 'Basic 123',
         },
