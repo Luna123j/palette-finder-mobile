@@ -1,83 +1,118 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Image, StyleSheet, Text, View, SafeAreaView } from 'react-native';
-import { WebView } from 'react-native-webview'
-import Canvas from 'react-native-canvas';
-import { canvasHtml } from "./canvas-html";
 import ImageColors from 'react-native-image-colors'
+import ColorBox from "./ColorBox";
+
+export default function Pixelimg(props) {
+  const initialState = {
+    colorOne: { value: '', name: '' },
+    colorTwo: { value: '', name: '' },
+    colorThree: { value: '', name: '' },
+    colorFour: { value: '', name: '' },
+    rawResult: '',
+  }
+
+  const [colorD, setColorD] = useState(initialState);
+  const [loading, setLoading] = useState(true)
+
+console.log(props.source);
 
 
-export default function Pixelimg (props) {
-  const options = {
-    imageWidth: props.imgData.width,
-    imageHeight: props.imgData.height, imageType: 'png'
-  };
 
-  // const [colorD, setColorD] = useState({payload: undefined});
+  useEffect(() => {
+    const fetchColor = async () => {
+      const result = await ImageColors.getColors(props.source.uri, {
+        fallback: '#000000',
+        quality: 'low',
+        pixelSpacing: 5,
+        headers: {
+          authorization: 'Basic 123',
+        },
+      }).catch(error=>console.log(error))     
 
-  // const pickerCallback = message => {
-  //   if (message && message.nativeEvent && message.nativeEvent.data) {
-  //     console.log(message.nativeEvent.data); // response from ImageColorPicker
-  //     setColorD(message.nativeEvent.data)
+      console.log(result)
+      switch (result.platform) {
+        case 'android':
+        case 'web':
+          setColorD({
+            colorOne: { value: result.lightVibrant, name: 'lightVibrant' },
+            colorTwo: { value: result.dominant, name: 'dominant' },
+            colorThree: { value: result.vibrant, name: 'vibrant' },
+            colorFour: { value: result.darkVibrant, name: 'darkVibrant' },
+            rawResult: JSON.stringify(result),
+          })
+          break
+        case 'ios':
+          setColorD({
+            colorOne: { value: result.background, name: 'background' },
+            colorTwo: { value: result.detail, name: 'detail' },
+            colorThree: { value: result.primary, name: 'primary' },
+            colorFour: { value: result.secondary, name: 'secondary' },
+            rawResult: JSON.stringify(result),
+          })
+          break
+        default:
+          throw new Error('Unexpected platform key')
+      }
 
-  //   }
-  // };
+      setLoading(false)
+    }
+    fetchColor()
+  }, [])
 
-  const result = 
-    ImageColors.getColors({uri:props.imgData.uri}, {
-    fallback: '#228B22',
-    cache: true,
-    })
-
-  console.log(result)
-
-  // switch (result.platform) {
-  //   case 'android':
-  //     // android result properties
-  //     const vibrantColor = result.vibrant
-  //     break
-  //   case 'web':
-  //     // web result properties
-  //     const lightVibrantColor = result.lightVibrant
-  //     break
-  //   case 'ios':
-  //     // iOS result properties
-  //     const primaryColor = result.primary
-  //     break
-  //   default:
-  //     throw new Error('Unexpected platform key')
-  // }
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.loading}>Loading...</Text>
+      </View>
+    )
+  }
 
   return (
     <View>
-      <Image source={canvasHtml(props.imgData.base64,options)} style = {{ width: 200, height: 200 }}/>
-      {/* <Canvas id={'canvas'}></Canvas> */}
+      <Image source={{ uri: props.imgData.uri }} style={{ width: 200, height: 200 }} />
+      <View style={styles.row}>
+        <ColorBox name={colorD.colorOne.name} value={colorD.colorOne.value} />
+        <ColorBox name={colorD.colorTwo.name} value={colorD.colorTwo.value} />
+      </View>
+      <View style={styles.row}>
+        <ColorBox name={colorD.colorThree.name} value={colorD.colorThree.value} />
+        <ColorBox name={colorD.colorFour.name} value={colorD.colorFour.value} />
+      </View>
     </View>
-    // <>
-    //   <WebView
-    //     source={{ html: canvasHtml(props.imgData.base64, options) }}
-    //     javaScriptEnabled={true}
-    //     onMessage={event => { pickerCallback(event) }}
 
-    //   />
-      // {/* <View >
-      //   { colorD.payload != undefined ?
-      //     <>
-      //       <Text style={{
-      //         color: `${colorD.payload[0]['0']},${colorD.payload[0]['1']},${colorD.payload[0]['2']}`,
-      //         fontWeight: 'bold',
-      //         fontSize: 30
-      //       }}>First Color</Text>
-      //       <Text style={styles.s}>Second Color</Text>
-      //       <Text style={styles.t}>Third Color</Text>
-      //     </>
-      //    : "" }
-      // </View> */}
-    // </>
-
-
-
-
+  
   )
 }
 
 
+const styles = StyleSheet.create({
+  image: {
+    width: '100%',
+    height: 250,
+  },
+  colorName: {
+    backgroundColor: 'white',
+    padding: 4,
+    fontSize: 18,
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%',
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loading: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  result: {
+    textAlign: 'center',
+    color: '#333333',
+  },
+})
