@@ -7,7 +7,7 @@ export default function ImageArea(props){
 
   return(
     <View>
-      <Image id={'uploadImg'} source = {props.source.uri ? props.source : ""} style = {{ width: 200, height: 200 }}/>
+      <Image id={'uploadImg'} source = {props.source.uri ? props.source : ""} style = {{aspectRatio: 1/1 }}/>
     </View>
   )
 }

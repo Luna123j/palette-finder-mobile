@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, Platform
 import ImageArea from './component/ImageArea';
 import UploadBtn from './component/UploadBtn';
 import * as ImagePicker from 'expo-image-picker'
-import Pixelimg from './component/Pixelimg';
+import GetPalette from './component/GetPalette';
 
 
 export default function App() {
@@ -58,19 +58,20 @@ export default function App() {
   }
 
   const createPallete = () => {
+    setImgData({base64: filepath.base64})
+
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <Text>choose image: </Text>
       {imgData.base64 ?
-        <Pixelimg source={{ uri: filepath.uri }} imgData={filepath} />
+        <GetPalette source={{ uri: filepath.uri }} imgData={filepath} />
         :
         <ImageArea source={{ uri: filepath.uri }} />
       }
       {filepath.uri ?
         <>
-          <UploadBtn onPress={createPixelArt} text={"create pixel art"} />
           <UploadBtn onPress={createPallete} text={"create pallete"} />
           <UploadBtn onPress={chooseFile} text={"retake image"} />
         </>

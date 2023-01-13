@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Button, Image, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { Button, Image, StyleSheet, Text, View, SafeAreaView,PixelRatio } from 'react-native';
 import ImageColors from 'react-native-image-colors'
 import ColorBox from "./ColorBox";
 
-export default function Pixelimg(props) {
+export default function GetPalette(props) {
   const initialState = {
     colorOne: { value: '', name: '' },
     colorTwo: { value: '', name: '' },
@@ -65,7 +65,7 @@ export default function Pixelimg(props) {
 
   return (
     <View>
-      <Image source={{ uri: props.imgData.uri }} style={{ width: 200, height: 200 }} />
+      <Image source={{ uri: props.imgData.uri }} style={{ aspectRatio: 1/1}} />
       <View style={styles.row}>
         <ColorBox name={colorD.colorOne.name} value={colorD.colorOne.value} />
         <ColorBox name={colorD.colorTwo.name} value={colorD.colorTwo.value} />
