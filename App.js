@@ -64,22 +64,21 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>choose image: </Text>
       {imgData.base64 ?
         <GetPalette source={{ uri: filepath.uri }} imgData={filepath} />
         :
         <ImageArea source={{ uri: filepath.uri }} />
       }
       {filepath.uri ?
-        <>
+        <View>
           <UploadBtn onPress={createPallete} text={"create pallete"} />
           <UploadBtn onPress={chooseFile} text={"retake image"} />
-        </>
+        </View>
         :
-        <>
+        <View>
           <UploadBtn onPress={chooseFile} text={"Choose image from library"} />
           <UploadBtn onPress={openCamera} text={"Take photo from Camera"} />
-        </>}
+        </View>}
 
     </SafeAreaView>
   );
@@ -90,6 +89,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
 });

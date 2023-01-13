@@ -65,14 +65,12 @@ export default function GetPalette(props) {
 
   return (
     <View>
-      <Image source={{ uri: props.imgData.uri }} style={{ aspectRatio: 1/1}} />
-      <View style={styles.row}>
-        <ColorBox name={colorD.colorOne.name} value={colorD.colorOne.value} />
-        <ColorBox name={colorD.colorTwo.name} value={colorD.colorTwo.value} />
-      </View>
-      <View style={styles.row}>
-        <ColorBox name={colorD.colorThree.name} value={colorD.colorThree.value} />
-        <ColorBox name={colorD.colorFour.name} value={colorD.colorFour.value} />
+      <Image source={{ uri: props.imgData.uri }} style={{ width: 200, height: 200 }} />
+      <View style={styles.colunm}>
+        <ColorBox name={colorD.colorOne.value} value={colorD.colorOne.value} />
+        <ColorBox name={colorD.colorTwo.value} value={colorD.colorTwo.value} />
+        <ColorBox name={colorD.colorThree.value} value={colorD.colorThree.value} />
+        <ColorBox name={colorD.colorFour.value} value={colorD.colorFour.value} />
       </View>
     </View>
 
@@ -86,14 +84,9 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 250,
   },
-  colorName: {
-    backgroundColor: 'white',
-    padding: 4,
-    fontSize: 18,
-  },
-  row: {
+  colunm: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'colunm',
     width: '100%',
   },
   container: {

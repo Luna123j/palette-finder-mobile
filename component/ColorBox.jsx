@@ -16,15 +16,14 @@ export default function ColorBox (props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  box: {
+    backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  box: {
-    flex: 1,
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
+  colorName: {
+    backgroundColor: 'transparent',
+    padding: 4,
+    fontSize: 18,
+  },
 })

@@ -3,7 +3,7 @@ import { TouchableOpacity,Button, Pressable, StyleSheet, Text, View } from 'reac
 
 export default function UploadBtn(props){
   return(
-    <View style={styles.container}>
+    <View>
       <TouchableOpacity style ={styles.btn} onPress={props.onPress}>
         <Text style={styles.text}>{props.text}</Text>
       </TouchableOpacity>
@@ -12,11 +12,6 @@ export default function UploadBtn(props){
 }
 
 const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
 
   btn:{
     alignItems: 'center',
@@ -26,6 +21,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: 'black',
+    marginVertical: 10
   },
   text:{
     fontSize: 16,
