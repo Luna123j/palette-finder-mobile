@@ -58,14 +58,14 @@ export default function GetPalette(props) {
   if (loading) {
     return (
       <View>
-        <Image source={{ uri: props.imgData.uri }} style={{ width: 200, height: 200 }} />
+        <Image source={{ uri: props.imgData.uri }} style = {{ width: '80%', height: '50%',resizeMode:'contain' }} />
       </View>
     )
   }
 
   return (
-    <View>
-      <Image source={{ uri: props.imgData.uri }} style={{ width: 200, height: 200 }} />
+    <View style = {{ width: '80%', height: '50%' }}>
+      <Image source={{ uri: props.imgData.uri }} style = {{ width: '100%', height: '100%',resizeMode:'contain' }}/>
       <View style={styles.colunm}>
         <ColorBox name={colorD.colorOne.value} value={colorD.colorOne.value} />
         <ColorBox name={colorD.colorTwo.value} value={colorD.colorTwo.value} />
@@ -80,10 +80,7 @@ export default function GetPalette(props) {
 
 
 const styles = StyleSheet.create({
-  image: {
-    width: '100%',
-    height: 250,
-  },
+
   colunm: {
     flex: 1,
     flexDirection: 'colunm',

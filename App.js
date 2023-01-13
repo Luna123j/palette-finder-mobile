@@ -67,15 +67,15 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       {retake ?
-        <ImageArea source={{ uri: filepath.uri }} />
+        <Image source = {{ uri: filepath.uri }} style = {{ width: '80%', height: '50%',resizeMode:'contain' }} />
         :
-        <GetPalette source={{ uri: filepath.uri }} imgData={filepath} />
+        <GetPalette imgData={filepath} />
       }
 
       {filepath.uri == require('./assets/upload.jpg') ?
         <View>
-          <UploadBtn onPress={chooseFile} text={"Choose image from library"} />
-          <UploadBtn onPress={openCamera} text={"Take photo from Camera"} />
+          <UploadBtn onPress={chooseFile} text={"Choose image"} />
+          <UploadBtn onPress={openCamera} text={"Take photo"} />
         </View>
         :
         <View>
@@ -89,9 +89,10 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    display: 'flex',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'space-around',
+    height:'100%'
   },
 });
