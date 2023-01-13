@@ -57,8 +57,8 @@ export default function GetPalette(props) {
 
   if (loading) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.loading}>Loading...</Text>
+      <View>
+        <Image source={{ uri: props.imgData.uri }} style={{ width: 200, height: 200 }} />
       </View>
     )
   }
@@ -89,11 +89,7 @@ const styles = StyleSheet.create({
     flexDirection: 'colunm',
     width: '100%',
   },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   loading: {
     fontSize: 20,
     textAlign: 'center',

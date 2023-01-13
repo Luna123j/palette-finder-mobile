@@ -12,7 +12,6 @@ export default function UploadBtn(props){
 }
 
 const styles = StyleSheet.create({
-
   btn:{
     alignItems: 'center',
     justifyContent: 'center',

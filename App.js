@@ -8,9 +8,10 @@ import GetPalette from './component/GetPalette';
 
 export default function App() {
 
-  const [filepath, setFilepath] = useState({ uri: "" });
+  const [filepath, setFilepath] = useState({ uri: require('./assets/upload.jpg') });
   const imgRef = useRef(null)
   const [imgData, setImgData] = useState({})
+  const [retake, setRetake] = useState(true)
   const height = filepath.height
   const width = filepath.width
 
@@ -18,7 +19,7 @@ export default function App() {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (permissionResult.granted === false) {
-      alert("You've refused to allow this appp to access your photos!");
+      alert("You've refused to allow this app to access your photos!");
       return;
     }
 
@@ -32,7 +33,8 @@ export default function App() {
 
 
     if (!result.canceled) {
-      setFilepath({ uri: result.assets[0].uri,base64: result.assets[0].base64, width: result.assets[0].width, height:result.assets[0].height });
+      setFilepath({ uri: result.assets[0].uri, base64: result.assets[0].base64, width: result.assets[0].width, height: result.assets[0].height });
+      setRetake(true);
     };
   };
 
@@ -54,32 +56,33 @@ export default function App() {
   const createPixelArt = () => {
 
 
-    setImgData({base64: filepath.base64})
+    setImgData({ base64: filepath.base64 })
   }
 
   const createPallete = () => {
-    setImgData({base64: filepath.base64})
-
+    setImgData({ base64: filepath.base64 })
+    setRetake(false);
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      {imgData.base64 ?
-        <GetPalette source={{ uri: filepath.uri }} imgData={filepath} />
-        :
+      {retake ?
         <ImageArea source={{ uri: filepath.uri }} />
+        :
+        <GetPalette source={{ uri: filepath.uri }} imgData={filepath} />
       }
-      {filepath.uri ?
+
+      {filepath.uri == require('./assets/upload.jpg') ?
+        <View>
+          <UploadBtn onPress={chooseFile} text={"Choose image from library"} />
+          <UploadBtn onPress={openCamera} text={"Take photo from Camera"} />
+        </View>
+        :
         <View>
           <UploadBtn onPress={createPallete} text={"create pallete"} />
           <UploadBtn onPress={chooseFile} text={"retake image"} />
         </View>
-        :
-        <View>
-          <UploadBtn onPress={chooseFile} text={"Choose image from library"} />
-          <UploadBtn onPress={openCamera} text={"Take photo from Camera"} />
-        </View>}
-
+      }
     </SafeAreaView>
   );
 }
