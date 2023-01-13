@@ -17,13 +17,15 @@ export default function GetPalette(props) {
 
   useEffect(() => {
     const fetchColor = async () => {
-      const result = await ImageColors.getColors(`data:image/jpeg;base64,${props.imgData.base64}`, {
+      const result = await ImageColors.getColors(`data:image/jpeg;base64,${props.imgData.base64}`
+      , {
         fallback: '#000000',
         quality: 'low',
         headers: {
           authorization: 'Basic 123',
         },
-      }).catch(error => console.log(error))
+      }
+      ).catch(error => console.log(error))
 
       switch (result.platform) {
         case 'android':
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     borderTopWidth: '4px',
     borderBottomWidth: '4px',
     borderRightWidth: '4px',
-    borderRadius: 2,
+    borderRadius: '2',
     backgroundColor: '#E5E5E5',
   },
 
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
     borderTopWidth: '4px',
     borderBottomWidth: '4px',
     borderRightWidth: '4px',
-    borderRadius: 2,
+    borderRadius: '2',
     backgroundColor: '#E5E5E5',
   }
 })

@@ -24,8 +24,8 @@ const styles = StyleSheet.create({
   colorName: {
     backgroundColor: 'inherit',
     backgroundClip: 'text',
-    padding: 4,
-    fontSize: 18,
+    padding: '4',
+    fontSize: '18 px',
     fontWeight: 'bold',
     color: 'transparent',
     filter: 'invert(1) grayscale(1) contrast(50)',

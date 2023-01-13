@@ -64,12 +64,12 @@ export default function App() {
       }
 
       {filepath.uri == require('./assets/upload.jpg') ?
-        <View>
+        <View style={{width: '60%'}}>
           <UploadBtn onPress={chooseFile} text={"Choose Image"} />
           <UploadBtn onPress={openCamera} text={"Take Photo"} />
         </View>
         :
-        <View>
+        <View style={{width: '60%'}}>
           {retake ?
             <UploadBtn onPress={createPallete} text={"Create Pallete"} />
             : ""}
@@ -90,21 +90,21 @@ const styles = StyleSheet.create({
     width: '100%',
     borderColor: '#FB5607',
     borderStyle: 'dashed',
-    borderLeftWidth:'2px',
-    borderTopWidth: '2px',
-    borderBottomWidth: '2px',
-    borderRightWidth:'2px',
-    borderRadius: 1
+    borderLeftWidth:'2pt',
+    borderTopWidth: '2pt',
+    borderBottomWidth: '2pt',
+    borderRightWidth:'2pt',
+    borderRadius: '1'
   },
 
   image: {
     borderColor: '#3A86FF',
     borderStyle: 'dashed',
-    borderLeftWidth:'4px',
-    borderTopWidth: '4px',
-    borderBottomWidth: '4px',
-    borderRightWidth:'4px',
-    borderRadius: 2,
+    borderLeftWidth:'4pt',
+    borderTopWidth: '4pt',
+    borderBottomWidth: '4pt',
+    borderRightWidth:'4pt',
+    borderRadius: '2',
     backgroundColor: '#E5E5E5'
   }
 });

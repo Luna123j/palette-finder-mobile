@@ -4,7 +4,7 @@ import { TouchableOpacity,Button, Pressable, StyleSheet, Text, View } from 'reac
 export default function UploadBtn(props){
   return(
     <View>
-      <TouchableOpacity style ={styles.btn} onPress={props.onPress}>
+      <TouchableOpacity onPress={props.onPress} style ={styles.btn} >
         <Text style={styles.text}>{props.text}</Text>
       </TouchableOpacity>
     </View>
@@ -15,18 +15,19 @@ const styles = StyleSheet.create({
   btn:{
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 15,
-    elevation: 3,
+    paddingVertical: '5%',
+    paddingHorizontal: '10%',
+    borderRadius: '10',
+    elevation: '3',
     backgroundColor: '#14213D',
-    marginVertical: 10
+    marginVertical: '10%',
+    width: '100%'
   },
   text:{
-    fontSize: 16,
-    lineHeight: 21,
+    fontSize: '20 pt',
+    lineHeight: '21 pt',
     fontWeight: 'bold',
-    letterSpacing: 0.25,
+    letterSpacing: '0.25pt',
     color: '#FCA311',
   }
 })
