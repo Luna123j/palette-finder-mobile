@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, Platform, PermissionsAndroid } from 'react-native';
-import ImageArea from './component/ImageArea';
 import UploadBtn from './component/UploadBtn';
 import * as ImagePicker from 'expo-image-picker'
 import GetPalette from './component/GetPalette';
@@ -12,8 +11,6 @@ export default function App() {
   const imgRef = useRef(null)
   const [imgData, setImgData] = useState({})
   const [retake, setRetake] = useState(true)
-  const height = filepath.height
-  const width = filepath.width
 
   const chooseFile = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -67,20 +64,22 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       {retake ?
-        <Image source = {{ uri: filepath.uri }} style = {{ width: '80%', height: '50%',resizeMode:'contain' }} />
+        <Image source={{ uri: filepath.uri }} style={[styles.image,{ width: '80%', height: '50%', resizeMode: 'contain'}]} />
         :
         <GetPalette imgData={filepath} />
       }
 
       {filepath.uri == require('./assets/upload.jpg') ?
         <View>
-          <UploadBtn onPress={chooseFile} text={"Choose image"} />
-          <UploadBtn onPress={openCamera} text={"Take photo"} />
+          <UploadBtn onPress={chooseFile} text={"Choose Image"} />
+          <UploadBtn onPress={openCamera} text={"Take Photo"} />
         </View>
         :
         <View>
-          <UploadBtn onPress={createPallete} text={"create pallete"} />
-          <UploadBtn onPress={chooseFile} text={"retake image"} />
+          {retake ?
+            <UploadBtn onPress={createPallete} text={"Create Pallete"} />
+            : ""}
+          <UploadBtn onPress={chooseFile} text={"Retake Image"} />
         </View>
       }
     </SafeAreaView>
@@ -90,9 +89,28 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    backgroundColor: '#fff',
+    backgroundColor: '#EAE2B7',
     alignItems: 'center',
     justifyContent: 'space-around',
-    height:'100%'
+    height: '100%', 
+    width: '100%',
+    borderColor: '#FB5607',
+    borderStyle: 'dashed',
+    borderLeftWidth:'2px',
+    borderTopWidth: '2px',
+    borderBottomWidth: '2px',
+    borderRightWidth:'2px',
+    borderRadius: 1
   },
+
+  image: {
+    borderColor: '#3A86FF',
+    borderStyle: 'dashed',
+    borderLeftWidth:'4px',
+    borderTopWidth: '4px',
+    borderBottomWidth: '4px',
+    borderRightWidth:'4px',
+    borderRadius: 2,
+    backgroundColor: '#E5E5E5'
+  }
 });

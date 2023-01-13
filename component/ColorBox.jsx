@@ -17,13 +17,17 @@ export default function ColorBox (props) {
 
 const styles = StyleSheet.create({
   box: {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     justifyContent: 'center',
     alignItems: 'center',
   },
   colorName: {
-    backgroundColor: 'transparent',
+    backgroundColor: 'inherit',
+    backgroundClip: 'text',
     padding: 4,
     fontSize: 18,
+    fontWeight: 'bold',
+    color: 'transparent',
+    filter: 'invert(1) grayscale(1) contrast(50)',
   },
 })

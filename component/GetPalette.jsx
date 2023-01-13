@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Image, StyleSheet, Text, View, SafeAreaView,PixelRatio } from 'react-native';
+import { Button, Image, StyleSheet, Text, View, SafeAreaView, PixelRatio } from 'react-native';
 import ImageColors from 'react-native-image-colors'
 import ColorBox from "./ColorBox";
 
@@ -23,9 +23,8 @@ export default function GetPalette(props) {
         headers: {
           authorization: 'Basic 123',
         },
-      }).catch(error=>console.log(error))     
+      }).catch(error => console.log(error))
 
-      console.log(result)
       switch (result.platform) {
         case 'android':
         case 'web':
@@ -57,43 +56,53 @@ export default function GetPalette(props) {
 
   if (loading) {
     return (
-      <View>
-        <Image source={{ uri: props.imgData.uri }} style = {{ width: '80%', height: '50%',resizeMode:'contain' }} />
+      <View style={[styles.image, { width: '80%', height: '50%', resizeMode: 'contain' }]}>
+        <Image source={{ uri: props.imgData.uri }} />
       </View>
     )
   }
 
   return (
-    <View style = {{ width: '80%', height: '50%' }}>
-      <Image source={{ uri: props.imgData.uri }} style = {{ width: '100%', height: '100%',resizeMode:'contain' }}/>
+    <>
+      <View style={[styles.image, { width: '80%', height: '50%', resizeMode: 'contain' }]}>
+        <Image source={{ uri: props.imgData.uri }} style={{ width: '100%', height: '100%', resizeMode: 'contain' }} />
+      </View>
       <View style={styles.colunm}>
         <ColorBox name={colorD.colorOne.value} value={colorD.colorOne.value} />
         <ColorBox name={colorD.colorTwo.value} value={colorD.colorTwo.value} />
         <ColorBox name={colorD.colorThree.value} value={colorD.colorThree.value} />
         <ColorBox name={colorD.colorFour.value} value={colorD.colorFour.value} />
       </View>
-    </View>
+    </>
 
-  
+
   )
 }
 
 
 const styles = StyleSheet.create({
-
   colunm: {
-    flex: 1,
+    display: 'flex',
     flexDirection: 'colunm',
-    width: '100%',
+    width: '80%',
+    borderColor: '#3A86FF',
+    borderStyle: 'dashed',
+    borderLeftWidth: '4px',
+    borderTopWidth: '4px',
+    borderBottomWidth: '4px',
+    borderRightWidth: '4px',
+    borderRadius: 2,
+    backgroundColor: '#E5E5E5',
   },
 
-  loading: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  result: {
-    textAlign: 'center',
-    color: '#333333',
-  },
+  image: {
+    borderColor: '#3A86FF',
+    borderStyle: 'dashed',
+    borderLeftWidth: '4px',
+    borderTopWidth: '4px',
+    borderBottomWidth: '4px',
+    borderRightWidth: '4px',
+    borderRadius: 2,
+    backgroundColor: '#E5E5E5',
+  }
 })

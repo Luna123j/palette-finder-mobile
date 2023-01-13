@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 15,
     elevation: 3,
-    backgroundColor: 'black',
+    backgroundColor: '#14213D',
     marginVertical: 10
   },
   text:{
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     fontWeight: 'bold',
     letterSpacing: 0.25,
-    color: 'white',
+    color: '#FCA311',
   }
 })
