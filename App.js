@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import {  useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, Image, Platform, PermissionsAndroid } from 'react-native';
 import UploadBtn from './component/UploadBtn';
 import * as ImagePicker from 'expo-image-picker'
@@ -8,7 +8,6 @@ import GetPalette from './component/GetPalette';
 export default function App() {
 
   const [filepath, setFilepath] = useState({ uri: require('./assets/upload.jpg') });
-  const imgRef = useRef(null)
   const [imgData, setImgData] = useState({})
   const [retake, setRetake] = useState(true)
 
@@ -50,11 +49,6 @@ export default function App() {
     }
   }
 
-  const createPixelArt = () => {
-
-
-    setImgData({ base64: filepath.base64 })
-  }
 
   const createPallete = () => {
     setImgData({ base64: filepath.base64 })
